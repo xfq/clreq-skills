@@ -4,21 +4,11 @@ The Claude Code adapter packages `clreq-skills` as a Claude Code skill while kee
 
 ## Install
 
-Personal skill:
-
 ```sh
-mkdir -p ~/.claude/skills
-ln -s /path/to/clreq-skills/adapters/claude-code/clreq ~/.claude/skills/clreq
+npx skills@latest add xfq/clreq-skills --skill clreq --agent claude-code --global
 ```
 
-Project skill:
-
-```sh
-mkdir -p .claude/skills
-ln -s /path/to/clreq-skills/adapters/claude-code/clreq .claude/skills/clreq
-```
-
-Do not copy only `adapters/claude-code/clreq` unless you also preserve or rewrite its relative links back to the repository.
+The installable, self-contained package is in `../../skills/clreq/`. This adapter remains a platform-specific development reference.
 
 ## Invoke
 
@@ -28,7 +18,7 @@ The skill maps Claude Code usage to:
 
 - Reference Adapter Coarse Triggers in `../reference.md`
 - Atomic Rule Cards in `../../rules/`
-- Review Suggestion format in `../../docs/review-suggestion-format.md`
+- Review Suggestion format in `../reference.md`
 - Project Override behavior in `../reference.md`
 
 The Claude Code adapter must not duplicate rule text. It should load relevant rule cards and fixtures from the Universal Rule Package.

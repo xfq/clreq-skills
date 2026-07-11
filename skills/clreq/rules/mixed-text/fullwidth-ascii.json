@@ -1,0 +1,64 @@
+{
+  "id": "clreq.mixed-text.fullwidth-ascii",
+  "title": "Avoid fullwidth ASCII forms as a layout workaround",
+  "layer": "clreq-backed",
+  "applies_to": {
+    "scripts": [
+      "Hans",
+      "Hant"
+    ],
+    "surfaces": [
+      "html",
+      "jsx",
+      "tsx",
+      "vue",
+      "svelte",
+      "markdown",
+      "mdx",
+      "i18n"
+    ],
+    "ambiguous_locale_policy": "allow"
+  },
+  "default_action": "autofix-when-requested",
+  "severity": "normal",
+  "detect": {
+    "signal": "Web-facing Chinese Text contains fullwidth ASCII forms in Latin or numeric runs, such as `ＡＰＩ`, `２０２６`, or `２．０`, where ordinary ASCII would preserve the same content.",
+    "ignore_when": [
+      "The fullwidth characters are part of a brand name, quoted source title, legacy identifier, password-like token, compatibility test, or user-generated content that must be preserved exactly.",
+      "The content is intentional typographic art, a retro UI treatment, a fixed-width table, or another documented Project Override.",
+      "The text is not rendered to end users, such as source comments, internal documentation, debug logs, or synthetic fixtures.",
+      "The characters are CJK punctuation or symbols rather than fullwidth forms of ASCII characters used in Latin or numeric runs.",
+      "The review task is about faithfully preserving source text rather than improving Web-facing Chinese Text."
+    ]
+  },
+  "rationale": "CLReq notes that fullwidth ASCII was historically used to make mixed Chinese-Western text look orderly, but modern typesetting engines should handle proportional or monospace presentation. Store Latin and numeric runs with ordinary ASCII forms unless exact preservation is required.",
+  "sources": {
+    "clreq": [
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#chinese_and_western_mixed_text_composition",
+        "section": "Characters & encoding: Composition of Chinese and Western Mixed Texts",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      }
+    ],
+    "web_platform": [],
+    "other": []
+  },
+  "examples": [
+    {
+      "context": "Chinese UI copy with fullwidth ASCII forms in Latin and numeric runs.",
+      "bad": "<p>支援 ＡＰＩ 版本 ２．０。</p>",
+      "good": "<p>支援 API 版本 2.0。</p>"
+    },
+    {
+      "context": "i18n string with a fullwidth year.",
+      "bad": "{\"release\":\"２０２６ 年路線圖已發布\"}",
+      "good": "{\"release\":\"2026 年路線圖已發布\"}"
+    }
+  ],
+  "agent_guidance": {
+    "comment_template": "[normal] clreq.mixed-text.fullwidth-ascii: Mixed Chinese-Western text is using fullwidth ASCII forms as stored text.\n\nWhy it matters: CLReq describes fullwidth ASCII as a historical layout workaround; modern layout engines can handle Latin letters and numerals with appropriate fonts.\nSuggested change: Use ordinary ASCII in Latin and numeric runs, and handle alignment or spacing through typography instead of fullwidth ASCII, unless exact preservation is required.\nSource: CLReq, Composition of Chinese and Western Mixed Texts.\nConfidence: high",
+    "autofix_notes": "If the user explicitly asks for edits, converting fullwidth ASCII forms in Latin and numeric runs to ordinary ASCII is usually mechanical. Preserve intentional brand text, quoted titles, compatibility fixtures, and non-ASCII CJK punctuation.",
+    "decision_notes": "If the string appears to be a brand, identifier, historical quotation, or deliberate visual style, ask for confirmation before suggesting a replacement."
+  }
+}

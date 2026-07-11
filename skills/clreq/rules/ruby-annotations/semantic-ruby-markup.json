@@ -1,0 +1,88 @@
+{
+  "id": "clreq.ruby.semantic-markup",
+  "title": "Use semantic ruby markup for Web-facing Chinese Text annotations",
+  "layer": "implementation-check",
+  "applies_to": {
+    "scripts": [
+      "Hans",
+      "Hant",
+      "Bopo",
+      "Latn"
+    ],
+    "surfaces": [
+      "html",
+      "jsx",
+      "tsx",
+      "vue",
+      "svelte",
+      "markdown",
+      "mdx"
+    ],
+    "writing_modes": [
+      "horizontal",
+      "vertical"
+    ],
+    "ambiguous_locale_policy": "allow"
+  },
+  "default_action": "review",
+  "severity": "normal",
+  "detect": {
+    "signal": "Web-facing Chinese Text represents pronunciation, romanization, Bopomofo, or interlinear annotation with plain `span`, `sup`, parentheses, or CSS-only positioning where semantic `<ruby>` and `<rt>` markup would express base text and annotation text.",
+    "ignore_when": [
+      "The annotation is only editorial prose, a footnote marker, a tooltip, or a reference note rather than ruby-like base text plus annotation text.",
+      "The project intentionally uses inline parentheses because the annotation must remain plain-text compatible, such as search snippets, SMS, email, or copy-paste-only content.",
+      "A framework component already emits semantic ruby markup after compilation.",
+      "The content is user-generated text that must be preserved exactly.",
+      "The text is not Web-facing Chinese Text."
+    ]
+  },
+  "rationale": "Chinese ruby and interlinear annotations attach small annotation text to base text for pronunciation or meaning. HTML ruby markup gives agents and browsers a semantic structure to review, style, and adapt across horizontal and vertical writing modes.",
+  "sources": {
+    "clreq": [
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#usage_of_interlinear_annotations",
+        "section": "Inline notes & annotations: Usage of ruby",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      },
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#overview_of_positioning_of_interlinear_annotations",
+        "section": "Overview of ruby positioning",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      }
+    ],
+    "web_platform": [
+      {
+        "title": "HTML Standard",
+        "url": "https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-ruby-element",
+        "section": "The ruby element",
+        "retrieved_or_version": "Living Standard, retrieved 2026-07-10"
+      },
+      {
+        "title": "CSS Ruby Annotation Layout Module Level 1",
+        "url": "https://www.w3.org/TR/css-ruby-1/#ruby-position-property",
+        "section": "Ruby Positioning: the ruby-position property",
+        "retrieved_or_version": "W3C Working Draft, retrieved 2026-07-10"
+      }
+    ],
+    "other": []
+  },
+  "examples": [
+    {
+      "context": "Pinyin annotation represented with plain spans.",
+      "bad": "<span class=\"annotated\">汉<span class=\"annotation\">han</span></span>",
+      "good": "<ruby>汉<rt>han</rt></ruby>"
+    },
+    {
+      "context": "Bopomofo annotation in Traditional Chinese UI.",
+      "bad": "<span class=\"Bopomofo\">好<sup>ㄏㄠˇ</sup></span>",
+      "good": "<ruby>好<rt>ㄏㄠˇ</rt></ruby>"
+    }
+  ],
+  "agent_guidance": {
+    "comment_template": "[normal] clreq.ruby.semantic-markup: Ruby-like Chinese annotation is represented with non-semantic markup.\n\nWhy it matters: CLReq describes ruby as annotation text attached to base text, and HTML provides `<ruby>`/`<rt>` semantics for that relationship across writing modes.\nSuggested change: Use semantic ruby markup for pronunciation, Bopomofo, romanization, or short glosses, then use CSS Ruby properties only for presentation details such as annotation position.\nSource: HTML Standard, ruby; CSS Ruby Annotation Layout; CLReq, Usage of ruby.\nConfidence: medium",
+    "autofix_notes": "Do not rewrite annotation markup automatically unless the base text and annotation text are unambiguous and the user explicitly asks for edits. Preserve plain-text annotations when the project needs exact copy-paste or search output.",
+    "decision_notes": "Ask for a human decision when the annotation system, target readers, or plain-text compatibility requirement is unclear. For Bopomofo placement, region and educational context may affect the final layout."
+  }
+}

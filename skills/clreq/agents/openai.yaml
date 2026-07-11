@@ -1,0 +1,4 @@
+interface:
+  display_name: "CLReq"
+  short_description: "Review Chinese Text"
+  default_prompt: "Use $clreq to review Chinese Text in this project."

@@ -1,0 +1,395 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:clreq-skills:schema:rule-card",
+  "title": "clreq-skills Atomic Rule Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "layer",
+    "applies_to",
+    "default_action",
+    "severity",
+    "detect",
+    "rationale",
+    "sources",
+    "examples",
+    "agent_guidance"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$",
+      "description": "Stable dotted identifier, such as clreq.metadata.lang-specificity."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "layer": {
+      "type": "string",
+      "enum": [
+        "clreq-backed",
+        "implementation-check",
+        "style-suggestion"
+      ]
+    },
+    "applies_to": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surfaces",
+        "ambiguous_locale_policy"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "scripts"
+          ]
+        },
+        {
+          "required": [
+            "locales"
+          ]
+        },
+        {
+          "required": [
+            "regions"
+          ]
+        }
+      ],
+      "properties": {
+        "scripts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "Hans",
+              "Hant",
+              "Bopo",
+              "Latn"
+            ]
+          }
+        },
+        "locales": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$"
+          }
+        },
+        "regions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          }
+        },
+        "surfaces": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "html",
+              "jsx",
+              "tsx",
+              "vue",
+              "svelte",
+              "markdown",
+              "mdx",
+              "i18n",
+              "css"
+            ]
+          }
+        },
+        "writing_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          }
+        },
+        "ambiguous_locale_policy": {
+          "type": "string",
+          "enum": [
+            "allow",
+            "advisory-only",
+            "ask-human"
+          ]
+        }
+      }
+    },
+    "default_action": {
+      "type": "string",
+      "enum": [
+        "review",
+        "autofix-when-requested",
+        "ask-human"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "blocking",
+        "strong",
+        "normal",
+        "advisory"
+      ]
+    },
+    "detect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signal",
+        "ignore_when"
+      ],
+      "properties": {
+        "signal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ignore_when": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clreq",
+        "web_platform",
+        "other"
+      ],
+      "properties": {
+        "clreq": {
+          "$ref": "#/$defs/sourceList"
+        },
+        "web_platform": {
+          "$ref": "#/$defs/sourceList"
+        },
+        "other": {
+          "$ref": "#/$defs/sourceList"
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bad",
+          "good"
+        ],
+        "properties": {
+          "context": {
+            "type": "string"
+          },
+          "bad": {
+            "type": "string",
+            "minLength": 1
+          },
+          "good": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "agent_guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comment_template",
+        "autofix_notes",
+        "decision_notes"
+      ],
+      "properties": {
+        "comment_template": {
+          "type": "string",
+          "minLength": 1
+        },
+        "autofix_notes": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision_notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "layer": {
+            "const": "clreq-backed"
+          }
+        },
+        "required": [
+          "layer"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sources": {
+            "properties": {
+              "clreq": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "not": {
+          "properties": {
+            "layer": {
+              "const": "style-suggestion"
+            }
+          },
+          "required": [
+            "layer"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "sources": {
+            "anyOf": [
+              {
+                "properties": {
+                  "clreq": {
+                    "minItems": 1
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "web_platform": {
+                    "minItems": 1
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "other": {
+                    "minItems": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "layer": {
+            "const": "style-suggestion"
+          },
+          "severity": {
+            "not": {
+              "const": "advisory"
+            }
+          }
+        },
+        "required": [
+          "layer",
+          "severity"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sources": {
+            "anyOf": [
+              {
+                "properties": {
+                  "clreq": {
+                    "minItems": 1
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "web_platform": {
+                    "minItems": 1
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "other": {
+                    "minItems": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sourceList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/sourceCitation"
+      }
+    },
+    "sourceCitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "url"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "section": {
+          "type": "string"
+        },
+        "retrieved_or_version": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
