@@ -1,0 +1,70 @@
+{
+  "id": "clreq.variants.contextual-hans-hant-conversion",
+  "title": "Treat Simplified-Traditional variant conversion as context-dependent",
+  "layer": "clreq-backed",
+  "applies_to": {
+    "scripts": [
+      "Hans",
+      "Hant"
+    ],
+    "surfaces": [
+      "html",
+      "jsx",
+      "tsx",
+      "vue",
+      "svelte",
+      "markdown",
+      "mdx",
+      "i18n"
+    ],
+    "ambiguous_locale_policy": "ask-human"
+  },
+  "default_action": "ask-human",
+  "severity": "strong",
+  "detect": {
+    "signal": "Web-facing Chinese Text is being reviewed or transformed across Simplified and Traditional Chinese, and the string contains characters whose mapping depends on meaning or locale context, such as `发` mapping to `發` or `髮`.",
+    "ignore_when": [
+      "The string has already been reviewed against a project glossary or translation memory for the target locale.",
+      "The apparent variant is part of a proper name, quoted historical text, source title, user-generated content, or legal text that must preserve original wording.",
+      "The project has a documented Project Override for the target locale, variant policy, and glossary entry covering the observed text.",
+      "The task does not involve variant conversion, target-locale review, or script consistency.",
+      "The text is not rendered to end users, such as source comments, internal documentation, debug logs, or synthetic fixtures."
+    ]
+  },
+  "rationale": "CLReq notes that Simplified and Traditional Chinese mappings are not always one-to-one and can depend on context. Agents should not mechanically convert variant-sensitive text without target locale, glossary, or human review.",
+  "sources": {
+    "clreq": [
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#characters_used_in_chinese_composition",
+        "section": "Characters & encoding: Characters used for Chinese Composition",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      },
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#basic_features_of_chinese_script",
+        "section": "Basic features of Chinese script",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      }
+    ],
+    "web_platform": [],
+    "other": []
+  },
+  "examples": [
+    {
+      "context": "Traditional Chinese i18n string that appears to come from mechanical Simplified conversion.",
+      "bad": "{\"zh-Hant\":{\"headline\":\"新品发售：护发套装\"}}",
+      "good": "{\"zh-Hant\":{\"headline\":\"新品發售：護髮套裝\"}}"
+    },
+    {
+      "context": "Ambiguous Chinese locale before conversion.",
+      "bad": "<p lang=\"zh\">新品发售：护发套装</p>",
+      "good": "<p lang=\"zh-Hans\">新品发售：护发套装</p> or confirm reviewed `zh-Hant` wording before converting."
+    }
+  ],
+  "agent_guidance": {
+    "comment_template": "[strong] clreq.variants.contextual-hans-hant-conversion: This Chinese variant conversion needs semantic or locale review.\n\nWhy it matters: CLReq notes that Simplified-Traditional mappings are not always one-to-one, so mechanical conversion can choose the wrong character for the intended meaning.\nSuggested change: Confirm the target script or locale and use a glossary-backed or human-reviewed string before changing the text; for example, `发` may need `發` or `髮` depending on meaning.\nSource: CLReq, Characters used for Chinese Composition.\nConfidence: medium",
+    "autofix_notes": "Do not apply Simplified-Traditional conversion automatically. Even when the target script is known, variant-sensitive words need glossary or human confirmation before edits.",
+    "decision_notes": "If the locale is bare `zh` or otherwise ambiguous, ask for the target locale first and lower confidence. If a project glossary exists, follow it and cite the Project Override in the Review Suggestion."
+  }
+}

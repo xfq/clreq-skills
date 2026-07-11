@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #1b1b1b;
+}
+
+.site-header {
+  max-width: 42rem;
+  padding: 3rem;
+}
+
+.buy-button {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  color: white;
+  background: #005a9c;
+  text-decoration: none;
+}
+
+.settings-panel {
+  margin: 3rem;
+  font-family: Inter, Arial;
+}
+
+.vertical-label {
+  position: fixed;
+  inset-block-start: 2rem;
+  inset-inline-end: 1rem;
+  transform: rotate(90deg);
+  transform-origin: top right;
+}

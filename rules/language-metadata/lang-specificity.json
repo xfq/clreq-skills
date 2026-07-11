@@ -1,0 +1,74 @@
+{
+  "id": "clreq.metadata.lang-specificity",
+  "title": "Use specific Chinese language metadata when script or region matters",
+  "layer": "implementation-check",
+  "applies_to": {
+    "locales": [
+      "zh"
+    ],
+    "surfaces": [
+      "html",
+      "jsx",
+      "tsx",
+      "vue",
+      "svelte",
+      "mdx",
+      "i18n"
+    ],
+    "ambiguous_locale_policy": "advisory-only"
+  },
+  "default_action": "review",
+  "severity": "advisory",
+  "detect": {
+    "signal": "Web-facing Chinese Text is scoped by bare `zh` language metadata, such as `<html lang=\"zh\">`, without a project override or nearby metadata that identifies script or region.",
+    "ignore_when": [
+      "The text is not rendered to end users, such as source comments, internal documentation, debug logs, or synthetic fixtures.",
+      "A Project Override documents that bare `zh` maps to a project default script or region for this surface.",
+      "A closer element, route, localized resource, or content record already provides a more specific language tag for the Web-facing Chinese Text.",
+      "The content is intentionally script-neutral and no active rule depends on script or region.",
+      "The review task is only about generic markup validity and not about Chinese text handling."
+    ]
+  },
+  "rationale": "Bare `zh` identifies Chinese but does not tell an agent whether script or regional conventions matter. When Chinese text guidance depends on `Hans`, `Hant`, or a region, the agent should ask for or suggest more specific language metadata instead of assuming it.",
+  "sources": {
+    "clreq": [],
+    "web_platform": [
+      {
+        "title": "HTML Standard",
+        "url": "https://html.spec.whatwg.org/multipage/dom.html#the-lang-and-xml:lang-attributes",
+        "section": "3.2.6.2 The lang and xml:lang attributes",
+        "retrieved_or_version": "Living Standard, retrieved 2026-07-10"
+      },
+      {
+        "title": "BCP 47: Tags for Identifying Languages",
+        "url": "https://www.rfc-editor.org/info/bcp47",
+        "section": "Language tag syntax, subtags, and matching",
+        "retrieved_or_version": "RFCs 5646 and 4647"
+      },
+      {
+        "title": "W3C Internationalization: Language tags in HTML and XML",
+        "url": "https://www.w3.org/International/articles/language-tags/",
+        "section": "Choosing language tags",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      }
+    ],
+    "other": []
+  },
+  "examples": [
+    {
+      "context": "Simplified Chinese UI copy with no project default locale.",
+      "bad": "<html lang=\"zh\">\n  <body><button>立即购买</button></body>\n</html>",
+      "good": "<html lang=\"zh-Hans\">\n  <body><button>立即购买</button></body>\n</html>"
+    },
+    {
+      "context": "Traditional Chinese UI copy scoped on a component.",
+      "bad": "<main lang=\"zh\">\n  <p>付款成功</p>\n</main>",
+      "good": "<main lang=\"zh-Hant\">\n  <p>付款成功</p>\n</main>"
+    }
+  ],
+  "agent_guidance": {
+    "comment_template": "[advisory] clreq.metadata.lang-specificity: The page uses a bare `zh` language tag for Web-facing Chinese Text.\n\nWhy it matters: Some Chinese text recommendations depend on script or region, and the agent should not assume Simplified or Traditional Chinese from `zh` alone.\nSuggested change: Confirm the intended locale and use a more specific BCP 47 language tag such as `zh-Hans` or `zh-Hant` when appropriate.\nSource: HTML Standard; BCP 47; W3C Internationalization language tag guidance.\nConfidence: medium",
+    "autofix_notes": "Do not replace bare `zh` automatically. If the user or Project Override identifies the intended script or region, an agent may update language metadata when explicitly asked to make changes.",
+    "decision_notes": "If locale intent is unknown, keep the finding advisory and ask for a human decision. If a project-wide default locale already resolves `zh`, mention the override or suppress the suggestion according to project policy."
+  }
+}

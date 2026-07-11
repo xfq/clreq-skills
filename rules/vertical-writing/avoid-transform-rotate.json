@@ -1,0 +1,84 @@
+{
+  "id": "clreq.vertical-writing.avoid-transform-rotate",
+  "title": "Use writing-mode for vertical Web-facing Chinese Text",
+  "layer": "implementation-check",
+  "applies_to": {
+    "scripts": [
+      "Hans",
+      "Hant"
+    ],
+    "surfaces": [
+      "css",
+      "html",
+      "jsx",
+      "tsx",
+      "vue",
+      "svelte"
+    ],
+    "writing_modes": [
+      "vertical"
+    ],
+    "ambiguous_locale_policy": "advisory-only"
+  },
+  "default_action": "review",
+  "severity": "normal",
+  "detect": {
+    "signal": "Web-facing Chinese Text is visually rotated with CSS transforms such as `transform: rotate(90deg)` or `rotate: 90deg` instead of using CSS vertical writing properties.",
+    "ignore_when": [
+      "The rotated element is a decorative logo, icon, badge, chart label, or short visual ornament rather than readable Web-facing Chinese Text.",
+      "The rotation is part of an intentional animation or art direction and the text also has an accessible, readable alternative.",
+      "The text is a short UI tab label whose layout has been reviewed and documented by the design system.",
+      "A Project Override documents that visual rotation is required for this component.",
+      "The text is not Web-facing Chinese Text."
+    ]
+  },
+  "rationale": "CSS transforms rotate the painted box, but they do not make the text participate in vertical writing layout. For readable Web-facing Chinese Text, CSS writing modes let layout, line progression, punctuation, and mixed Latin text be reviewed as text rather than as a rotated graphic.",
+  "sources": {
+    "clreq": [
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#writing_modes",
+        "section": "Characters & encoding: Writing modes",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      },
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#mixed_text_composition_in_vertical_writing_mode",
+        "section": "Mixed text composition in vertical writing mode",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      }
+    ],
+    "web_platform": [
+      {
+        "title": "CSS Writing Modes Level 4",
+        "url": "https://www.w3.org/TR/css-writing-modes-4/#writing-mode",
+        "section": "Block Flow Direction: the writing-mode property",
+        "retrieved_or_version": "W3C Candidate Recommendation Draft, retrieved 2026-07-10"
+      },
+      {
+        "title": "CSS Writing Modes Level 4",
+        "url": "https://www.w3.org/TR/css-writing-modes-4/#text-orientation",
+        "section": "Glyph Orientation: the text-orientation property",
+        "retrieved_or_version": "W3C Candidate Recommendation Draft, retrieved 2026-07-10"
+      }
+    ],
+    "other": []
+  },
+  "examples": [
+    {
+      "context": "Readable vertical Chinese section title.",
+      "bad": ".section-title {\n  transform: rotate(90deg);\n}",
+      "good": ".section-title {\n  writing-mode: vertical-rl;\n  text-orientation: mixed;\n}"
+    },
+    {
+      "context": "Vertical Chinese navigation label.",
+      "bad": ".side-nav__label {\n  rotate: 90deg;\n}",
+      "good": ".side-nav__label {\n  writing-mode: vertical-rl;\n  text-orientation: mixed;\n}"
+    }
+  ],
+  "agent_guidance": {
+    "comment_template": "[normal] clreq.vertical-writing.avoid-transform-rotate: Web-facing Chinese Text is rotated visually instead of using vertical writing layout.\n\nWhy it matters: CSS transforms rotate the painted box, but vertical writing needs text layout behavior for line progression, punctuation, and mixed Latin or numeric text.\nSuggested change: Use `writing-mode` with an appropriate vertical direction and review `text-orientation` for Latin text and numerals; keep visual rotation only for decorative or explicitly reviewed cases.\nSource: CSS Writing Modes Level 4, writing-mode and text-orientation; CLReq, Writing modes.\nConfidence: medium",
+    "autofix_notes": "Do not replace rotation automatically. The correct `writing-mode` direction, `text-orientation`, and layout containment depend on the component, region, and design system.",
+    "decision_notes": "Ask for a human decision when the vertical direction, reading order, or decorative-vs-readable role is unclear. If the element is purely decorative and has a readable alternative, suppress or downgrade the suggestion."
+  }
+}

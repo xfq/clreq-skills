@@ -1,0 +1,74 @@
+{
+  "id": "clreq.punctuation.chinese-pause-marks",
+  "title": "Use Chinese pause punctuation in Chinese body text",
+  "layer": "clreq-backed",
+  "applies_to": {
+    "scripts": [
+      "Hans",
+      "Hant"
+    ],
+    "surfaces": [
+      "html",
+      "jsx",
+      "tsx",
+      "vue",
+      "svelte",
+      "markdown",
+      "mdx",
+      "i18n"
+    ],
+    "writing_modes": [
+      "horizontal",
+      "vertical"
+    ],
+    "ambiguous_locale_policy": "allow"
+  },
+  "default_action": "review",
+  "severity": "normal",
+  "detect": {
+    "signal": "Web-facing Chinese prose uses ASCII comma, period, question mark, exclamation mark, semicolon, or colon as sentence punctuation where Chinese pause punctuation would be expected.",
+    "ignore_when": [
+      "The punctuation is part of a URL, email address, file path, code token, command, decimal number, version number, product identifier, or protocol syntax.",
+      "The content is a formula-heavy technical document, Western-language grammar example, or other Project Override where Western punctuation is intentionally used for consistency.",
+      "The punctuation appears inside a quoted Western sentence or untranslated source title.",
+      "The text is not rendered to end users, such as source comments, internal documentation, debug logs, or synthetic fixtures.",
+      "The project has a documented editorial style that intentionally uses Western punctuation for this surface."
+    ]
+  },
+  "rationale": "CLReq treats Chinese pause marks such as `。`, `，`, and `、` as core Chinese punctuation, and says Chinese-style punctuation should be used in principle when the main text is Chinese. Agents should review ASCII sentence punctuation in Chinese prose, while respecting technical and editorial exceptions.",
+  "sources": {
+    "clreq": [
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#categories_and_usage_of_punctuation_marks",
+        "section": "Phrase & section boundaries: Categories and usage of punctuation marks",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      },
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#chinese_and_western_mixed_text_composition",
+        "section": "Characters & encoding: Composition of Chinese and Western Mixed Texts",
+        "retrieved_or_version": "retrieved 2026-07-10"
+      }
+    ],
+    "web_platform": [],
+    "other": []
+  },
+  "examples": [
+    {
+      "context": "Chinese UI prose with ASCII comma and period.",
+      "bad": "<p>今天发布新功能, 请升级到最新版本.</p>",
+      "good": "<p>今天发布新功能，请升级到最新版本。</p>"
+    },
+    {
+      "context": "Chinese i18n message with a technical version number that should keep its decimal point.",
+      "bad": "{\"message\":\"支持 API 2.0, 立即启用.\"}",
+      "good": "{\"message\":\"支持 API 2.0，立即启用。\"}"
+    }
+  ],
+  "agent_guidance": {
+    "comment_template": "[normal] clreq.punctuation.chinese-pause-marks: Chinese prose is using ASCII sentence punctuation.\n\nWhy it matters: CLReq describes Chinese pause punctuation as part of Chinese text layout, and ASCII punctuation can make Chinese UI copy look inconsistent unless a technical or editorial exception applies.\nSuggested change: Replace sentence punctuation in the Chinese prose with Chinese punctuation such as `，` and `。`, while preserving punctuation inside URLs, versions, code, formulas, and quoted Western text.\nSource: CLReq, Categories and usage of punctuation marks; CLReq, Composition of Chinese and Western Mixed Texts.\nConfidence: high",
+    "autofix_notes": "Do not blindly replace all ASCII punctuation. If the user asks for edits, only change punctuation that is clearly sentence punctuation in Web-facing Chinese prose and leave technical tokens unchanged.",
+    "decision_notes": "If the surface is formula-heavy, Western-language teaching material, or has an explicit editorial override, downgrade to advisory or suppress the suggestion according to project policy."
+  }
+}
