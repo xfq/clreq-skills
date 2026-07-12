@@ -50,7 +50,7 @@ The installable package is the self-contained `skills/clreq/` directory.
 
 ## Use
 
-Review selected files in Codex:
+Review selected files:
 
 ```text
 Use $clreq to review src/components/Checkout.tsx and src/locales/zh-Hans.json for user-facing Chinese text and layout issues.
@@ -63,13 +63,6 @@ Use $clreq to review the files changed in the current diff.
 ```
 
 The skill works from the files or diff already in scope. It does not scan the entire repository by default.
-
-## Review Behavior
-
-- Produces source-aware review suggestions by default.
-- Respects project locale, localization, design-system, and content-preservation policies.
-- Preserves quoted, legal, historical, and branded content when a rule marks it as exempt.
-- Modifies files only when the user explicitly requests edits.
 
 ## Repository Structure
 
@@ -90,7 +83,7 @@ The root `rules/`, `fixtures/`, `schema/`, and reference adapter are the authori
 ./scripts/check-packaged-skill.sh
 ```
 
-## Sources and Project Status
+## Sources
 
 Rules cite the sources they rely on. CLReq-backed rules link to [Requirements for Chinese Text Layout](https://www.w3.org/TR/clreq/) or related W3C internationalization material. Web implementation guidance cites relevant HTML, CSS, Unicode, or other authoritative sources.
 

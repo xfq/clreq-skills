@@ -30,7 +30,7 @@
 使用 $clreq 审查 samples/web-smoke/index.html 和 samples/web-smoke/styles.css。
 ```
 
-可以查看[完整 smoke 示例](samples/web-smoke/README.md)及其[预期审查结果](samples/web-smoke/expected-review.md)。
+可以查看[完整smoke示例](samples/web-smoke/README.md)及其[预期审查结果](samples/web-smoke/expected-review.md)。
 
 ## 安装
 
@@ -50,7 +50,7 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 
 ## 使用
 
-在 Codex 中审查指定文件：
+审查指定文件：
 
 ```text
 使用 $clreq 审查 src/components/Checkout.tsx 和 src/locales/zh-Hans.json 中面向用户的中文文本与排版问题。
@@ -62,24 +62,17 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 使用 $clreq 审查当前 diff 中变更的文件。
 ```
 
-在 Claude Code 中审查本地化资源：
+审查本地化资源：
 
 ```text
 /clreq review src/locales/zh-Hant.json
 ```
 
-技能只处理已经明确指定或位于当前任务范围内的文件与 diff，默认不会扫描整个仓库。
-
-## 审查行为
-
-- 默认输出简洁、带来源依据的审查建议。
-- 尊重项目中的语言、地区、本地化、设计系统和内容保留策略。
-- 当规则标明例外时，保留引用、法律、历史和品牌内容。
-- 只有在用户明确要求修改时才会改动文件。
+技能只处理已经明确指定或位于当前任务范围内的文件与diff，默认不会扫描整个仓库。
 
 ## 项目结构
 
-项目将通用规则包与平台接入层分开维护：
+项目把通用规则包与平台接入层分开维护：
 
 - `skills/clreq/`：自包含、可直接安装的技能包。
 - `rules/`：原子规则卡的内容编写源。
@@ -96,7 +89,7 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 ./scripts/check-packaged-skill.sh
 ```
 
-## 来源与项目性质
+## 来源
 
 每条规则都必须注明依据。基于 CLReq 的规则会链接至[《中文排版需求》](https://www.w3.org/TR/clreq/)或密切相关的 W3C 国际化资料；涉及 Web 实现的指南会引用相应的 HTML、CSS、Unicode 或其他权威来源。
 
