@@ -9,12 +9,13 @@ Produce concise, source-aware review suggestions for Web-facing Chinese text.
 
 ## Workflow
 
-1. Read `references/review-workflow.md` for scope, triggers, project overrides, and output format.
+1. Read `references/review-workflow.md` for scope, rule selection, review completion, project overrides, and output format.
 2. Identify the locale and rendered surface from the files already in scope. Inspect nearby localization or design-system context only when needed.
-3. Read only the relevant rule cards under `rules/`.
-4. Apply each rule's applicability, detection signals, `ignore_when` conditions, ambiguous-locale policy, and project overrides.
-5. Emit the smallest useful set of review suggestions.
-6. Do not modify files unless the user explicitly asks for edits.
+3. Account for every rule card under `rules/` in an internal coverage ledger, then fully read each candidate selected by the reference workflow.
+4. Apply each candidate rule's detection signals, `ignore_when` conditions, ambiguous-locale policy, and project overrides.
+5. Finish only after every rule has a disposition and every distinct unsuppressed finding has been emitted or the review limitation has been stated.
+6. Consolidate duplicate findings without dropping independent issues.
+7. Do not modify files unless the user explicitly asks for edits.
 
 ## Guardrails
 

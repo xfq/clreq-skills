@@ -21,7 +21,7 @@ The skill maps Claude Code usage to:
 - Review Suggestion format in `../reference.md`
 - Project Override behavior in `../reference.md`
 
-The Claude Code adapter must not duplicate rule text. It should load relevant rule cards and fixtures from the Universal Rule Package.
+The Claude Code adapter must not duplicate rule text. It should use the Reference Adapter's Rule Selection procedure to account for every rule card, then fully read the candidates and any needed fixtures from the Universal Rule Package.
 
 ## Behavior
 

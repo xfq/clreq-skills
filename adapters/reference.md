@@ -34,10 +34,36 @@ Do not comment on non-user-facing Chinese text unless the user explicitly asks f
 1. Identify the surface: HTML, JSX, TSX, Vue, Svelte, Markdown, MDX, i18n, or CSS.
 2. Identify the locale context from `lang`, route, i18n key, project config, or Project Override.
 3. If the context is bare `zh` and a rule depends on script or region, follow the rule's Ambiguous Chinese Locale policy.
-4. Read the relevant Atomic Rule Cards from `rules/`; do not duplicate or rewrite them in the adapter.
-5. Apply rule-level Detection Signals and `ignore_when` conditions.
-6. Emit Review Suggestions using `docs/review-suggestion-format.md`.
-7. Do not modify files unless the user explicitly asks for edits.
+4. Build the candidate rule set using the Rule Selection procedure below.
+5. Read every candidate Atomic Rule Card and apply its Detection Signals, `ignore_when` conditions, Ambiguous Chinese Locale policy, and Project Overrides.
+6. Check the Review Completion conditions below; do not stop after the first finding.
+7. Emit Review Suggestions using `docs/review-suggestion-format.md`.
+8. Do not modify files unless the user explicitly asks for edits.
+
+## Rule Selection
+
+Create an internal coverage ledger for every `*.json` Atomic Rule Card under `rules/`. The ledger is working state and does not need to appear in the final response.
+
+For each rule, inspect `id` and `applies_to`, then mark it as a candidate when all applicable selectors allow it:
+
+- `surfaces` intersects the rendered surfaces in scope.
+- Any declared `scripts`, `locales`, or `regions` matches the known context. When that context is missing or ambiguous, do not exclude the rule solely for that reason; keep it as a candidate and apply its `ambiguous_locale_policy` rather than silently assuming a locale.
+- Any declared `writing_modes` matches the observed writing mode. If the scoped code contains evidence that writing mode is being established or simulated, such as `writing-mode`, `text-orientation`, or text rotation, inspect the corresponding writing-mode rules.
+- Project Overrides have not disabled the rule for the scoped path.
+
+Do not choose rules from filenames or remembered categories alone. Account for every current rule card in the ledger as `candidate`, `not applicable`, or `disabled by override`, with a short reason. Fully read each candidate before deciding whether its Detection Signal is present or an `ignore_when` condition suppresses it.
+
+## Review Completion
+
+The review is complete only when:
+
+- Every current Atomic Rule Card has a ledger status and reason.
+- Every candidate rule has been checked against all files and rendered text in scope, including relevant nearby locale or design-system context.
+- Ambiguous locale cases have followed the rule's policy instead of being silently excluded.
+- Every distinct unsuppressed finding has been emitted; consolidate duplicate instances of the same underlying issue, but do not omit independent findings to keep the output short.
+- If no findings remain, report that no applicable issues were found in the reviewed scope.
+
+If required context cannot be inspected, state the limitation and which candidate rules remain unresolved rather than claiming the review is complete.
 
 ## Project Overrides
 
@@ -68,7 +94,7 @@ Source: <short Source Citation or "No source citation">
 Confidence: high | medium | low
 ```
 
-When multiple findings apply, prefer the smallest useful set. Avoid long typography explanations.
+When multiple findings apply, consolidate duplicates into the smallest useful set without dropping distinct applicable findings. Avoid long typography explanations.
 
 ## Reference Smoke Fixture
 
