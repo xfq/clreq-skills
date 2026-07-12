@@ -2,12 +2,6 @@
 
 `clreq-skills` packages Chinese web text layout guidance for coding agents. It is based on [CLReq](https://github.com/w3c/clreq) and related sources.
 
-## Status
-
-This repository is the first-version scaffold for the independent `clreq-skills` project. It defines the project boundary and the places where rules, adapters, fixtures, schema, and authoring documentation will live.
-
-This project is not part of the CLReq document.
-
 ## Scope
 
 `clreq-skills` helps coding agents review Web-facing Chinese Text in websites and web applications. The first version focuses on Review Suggestions for:
