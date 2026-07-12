@@ -1,5 +1,7 @@
 # clreq-skills
 
+English | [简体中文](README.zh-Hans.md)
+
 `clreq-skills` packages Chinese web text layout guidance for coding agents. It is based on [CLReq](https://github.com/w3c/clreq) and related sources.
 
 ## Project Shape
@@ -15,7 +17,7 @@ The core is a Universal Rule Package. Platform Adapters map that package into sp
 
 ## Install
 
-Install the self-contained `clreq` skill from GitHub:
+Install the `clreq` skill from GitHub:
 
 ```sh
 npx skills@latest add xfq/clreq-skills --skill clreq
@@ -25,12 +27,6 @@ To install it globally:
 
 ```sh
 npx skills@latest add xfq/clreq-skills --skill clreq --global
-```
-
-List the skills exposed by a local checkout before publishing changes:
-
-```sh
-npx skills@latest add . --list
 ```
 
 ## Use in an Agent
