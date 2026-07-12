@@ -53,7 +53,7 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 审查指定文件：
 
 ```text
-使用 $clreq 审查 src/components/Checkout.tsx 和 src/locales/zh-Hans.json 中面向用户的中文文本与排版问题。
+使用 $clreq 审查 src/components/Checkout.tsx 和 src/locales/zh-Hans.json 里的中文文本和排版问题。
 ```
 
 审查改动的文件：

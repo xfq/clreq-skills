@@ -53,7 +53,7 @@ The installable package is the self-contained `skills/clreq/` directory.
 Review selected files:
 
 ```text
-Use $clreq to review src/components/Checkout.tsx and src/locales/zh-Hans.json for user-facing Chinese text and layout issues.
+Use $clreq to review src/components/Checkout.tsx and src/locales/zh-Hans.json for Chinese text and layout issues.
 ```
 
 Review the current change:
