@@ -15,7 +15,18 @@ Coarse Triggers include:
 - CSS that can affect rendered Chinese layout, wrapping, fonts, punctuation, vertical writing, or ruby annotations.
 - User requests that mention Chinese typography, CLReq, punctuation, mixed Chinese-Western text, locale variants, vertical writing, ruby, pinyin, Bopomofo, or Web-facing Chinese Text review.
 
-Do not treat this as a full repository scan. Use the files already in scope for the agent task, plus nearby localization or design-system files only when needed to understand applicability or Project Overrides.
+Use the files already in scope for the agent task by default, plus nearby localization or design-system files when needed to understand applicability or Project Overrides. If the user explicitly requests a repository-wide or project-wide review, use the Repository Scan procedure below.
+
+## Repository Scan
+
+For an explicit repository-wide or project-wide review:
+
+1. Discover candidate files from version-control tracked files when possible; otherwise enumerate the repository tree.
+2. Include supported Web-facing and localization formats such as HTML, JSX, TSX, Vue, Svelte, Markdown, MDX, JSON, YAML, JavaScript, TypeScript, and CSS-family files. Use content signals and project structure to narrow broad formats such as JSON, YAML, JavaScript, and TypeScript to user-facing or localization content.
+3. Exclude VCS metadata, dependencies, vendored code, caches, generated files, minified bundles, coverage data, and build outputs unless the user explicitly includes them. Respect ignore files and host-project instructions.
+4. Inspect project locale, i18n, routing, and design-system configuration before judging ambiguous files.
+5. Review candidates in batches when necessary. Maintain an internal file coverage ledger with `reviewed`, `not user-facing`, `generated or excluded`, or `unresolved` status so every discovered candidate is accounted for.
+6. In the final response, state the repository scope and any exclusions or unresolved coverage limitations.
 
 ## What To Ignore By Default
 
@@ -58,6 +69,7 @@ Do not choose rules from filenames or remembered categories alone. Account for e
 The review is complete only when:
 
 - Every current Atomic Rule Card has a ledger status and reason.
+- Every discovered candidate file in repository scope has a file coverage status.
 - Every candidate rule has been checked against all files and rendered text in scope, including relevant nearby locale or design-system context.
 - Ambiguous locale cases have followed the rule's policy instead of being silently excluded.
 - Every distinct unsuppressed finding has been emitted; consolidate duplicate instances of the same underlying issue, but do not omit independent findings to keep the output short.

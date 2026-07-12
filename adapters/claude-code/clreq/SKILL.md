@@ -1,6 +1,6 @@
 ---
 name: clreq
-description: Review Web-facing Chinese Text in websites and web apps using the clreq-skills Universal Rule Package. Use when Claude Code sees rendered Chinese UI copy, localized messages, HTML/JSX/TSX/Vue/Svelte/Markdown/MDX/i18n/CSS that affects Chinese text, or requests about CLReq, Chinese punctuation, mixed Chinese-Western text, locale variants, line breaking, typography CSS, vertical writing, ruby, pinyin, Bopomofo, or Chinese web text review.
+description: Review Web-facing Chinese Text in websites and web apps using the clreq-skills Universal Rule Package, from individual files, diffs, directories, or an entire repository. Use when Claude Code sees rendered Chinese UI copy, localized messages, HTML/JSX/TSX/Vue/Svelte/Markdown/MDX/i18n/CSS that affects Chinese text, repository-wide Chinese text audits, or requests about CLReq, Chinese punctuation, mixed Chinese-Western text, locale variants, line breaking, typography CSS, vertical writing, ruby, pinyin, Bopomofo, or Chinese web text review.
 ---
 
 # clreq-skills Claude Code Adapter
@@ -25,7 +25,7 @@ Use this skill to produce short, source-aware Review Suggestions for Web-facing 
 
 Use the current task and any `/clreq` slash-command arguments as the review scope. Do not add hooks, permission grants, dynamic shell injections, or command-side effects for the first version.
 
-Work from the files already in scope, plus nearby localization or design-system context only when needed. Do not run a full repository scan.
+Work from the files already in scope, plus nearby localization or design-system context when needed. Run the Reference Adapter's Repository Scan procedure when the user explicitly requests a repository-wide or project-wide review.
 
 ## Project Overrides
 

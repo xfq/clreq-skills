@@ -62,7 +62,13 @@ Review the current change:
 Use $clreq to review the files changed in the current diff.
 ```
 
-The skill works from the files or diff already in scope. It does not scan the entire repository by default.
+Review the entire repository:
+
+```text
+Use $clreq to scan this repository for Chinese text and layout issues.
+```
+
+The skill works from the files or diff already in scope by default. It scans the entire repository when explicitly requested, while excluding dependencies, generated files, caches, and build outputs unless they are included by the user.
 
 ## Repository Structure
 

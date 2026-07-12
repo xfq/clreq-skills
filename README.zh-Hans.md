@@ -68,7 +68,13 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 /clreq review src/locales/zh-Hant.json
 ```
 
-技能只处理已经明确指定或位于当前任务范围内的文件与diff，默认不会扫描整个仓库。
+扫描整个仓库：
+
+```text
+使用 $clreq 扫描仓库中的中文文本和排版问题。
+```
+
+技能默认只处理已经明确指定或位于当前任务范围内的文件与 diff；用户明确要求时也可以扫描整个仓库，默认会排除依赖、生成文件、缓存和构建产物。
 
 ## 项目结构
 
