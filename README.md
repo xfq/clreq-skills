@@ -2,19 +2,6 @@
 
 `clreq-skills` packages Chinese web text layout guidance for coding agents. It is based on [CLReq](https://github.com/w3c/clreq) and related sources.
 
-## Scope
-
-`clreq-skills` helps coding agents review Web-facing Chinese Text in websites and web applications. The first version focuses on Review Suggestions for:
-
-- language metadata
-- Chinese punctuation
-- Chinese-Western mixed text
-- line breaking and wrapping
-- typography CSS
-- vertical writing
-- ruby and annotations
-- locale-sensitive variants
-
 ## Non-goals
 
 `clreq-skills` is not a machine-executable linter.
