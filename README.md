@@ -33,6 +33,14 @@ List the skills exposed by a local checkout before publishing changes:
 npx skills@latest add . --list
 ```
 
+## Use in an Agent
+
+After installing the skill, give the agent a prompt such as:
+
+```text
+使用 $clreq 审查这个页面里的中文文本和排版。
+```
+
 The installable package lives in `skills/clreq/`. It is self-contained so copied installations do not depend on files outside the installed skill directory. Files under `adapters/` remain platform-specific development references rather than installation entry points.
 
 The root `rules/`, `fixtures/`, `schema/`, and reference adapter remain the authoring sources. After changing them, update the packaged copies and verify that they are synchronized:
