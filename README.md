@@ -2,10 +2,6 @@
 
 `clreq-skills` packages Chinese web text layout guidance for coding agents. It is based on [CLReq](https://github.com/w3c/clreq) and related sources.
 
-## Non-goals
-
-`clreq-skills` is not a machine-executable linter.
-
 ## Project Shape
 
 The core is a Universal Rule Package. Platform Adapters map that package into specific coding-agent environments.
