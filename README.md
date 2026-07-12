@@ -2,53 +2,98 @@
 
 English | [简体中文](README.zh-Hans.md)
 
-`clreq-skills` packages Chinese web text layout guidance for coding agents. It is based on [CLReq](https://github.com/w3c/clreq) and related sources.
+CLReq-backed Chinese web text, i18n, and focused layout checks for coding agents.
 
-## Project Shape
+This skill helps Codex, Claude Code, and other coding agents that support the Agent Skills format review user-facing Chinese text in HTML, JSX, TSX, Vue, Svelte, Markdown, MDX, localization resources, and CSS. It reports concise findings with a suggested action, confidence level, and source citation.
 
-The core is a Universal Rule Package. Platform Adapters map that package into specific coding-agent environments.
+## See It in 30 Seconds
 
-- `rules/` hosts Atomic Rule Cards.
-- `adapters/` hosts Platform Adapters.
-- `fixtures/` hosts Golden Review Fixtures.
-- `schema/` hosts rule-card schema material.
-- `skills/clreq/` hosts the self-contained installable skill.
-- `samples/` hosts smoke samples for agent review behavior.
+Given a page containing:
+
+```html
+<html lang="zh">
+  <p>今天下单, 明天发货.</p>
+</html>
+```
+
+and Chinese text rotated with CSS:
+
+```css
+.vertical-label {
+  transform: rotate(90deg);
+}
+```
+
+ask the agent:
+
+```text
+Use $clreq to review samples/web-smoke/index.html and samples/web-smoke/styles.css.
+```
+
+See the [complete smoke sample](samples/web-smoke/README.md) and its [expected review](samples/web-smoke/expected-review.md).
 
 ## Install
 
-Install the `clreq` skill from GitHub:
-
-```sh
-npx skills@latest add xfq/clreq-skills --skill clreq
-```
-
-To install it globally:
+Install globally:
 
 ```sh
 npx skills@latest add xfq/clreq-skills --skill clreq --global
 ```
 
-## Use in an Agent
+Install for the current project:
 
-After installing the skill, give the agent a prompt such as:
-
-```text
-使用 $clreq 审查这个页面里的中文文本和排版。
+```sh
+npx skills@latest add xfq/clreq-skills --skill clreq
 ```
 
-The installable package lives in `skills/clreq/`. It is self-contained so copied installations do not depend on files outside the installed skill directory. Files under `adapters/` remain platform-specific development references rather than installation entry points.
+The installable package is the self-contained `skills/clreq/` directory.
 
-The root `rules/`, `fixtures/`, `schema/`, and reference adapter remain the authoring sources. After changing them, update the packaged copies and verify that they are synchronized:
+## Use
+
+Review selected files in Codex:
+
+```text
+Use $clreq to review src/components/Checkout.tsx and src/locales/zh-Hans.json for user-facing Chinese text and layout issues.
+```
+
+Review the current change:
+
+```text
+Use $clreq to review the files changed in the current diff.
+```
+
+The skill works from the files or diff already in scope. It does not scan the entire repository by default.
+
+## Review Behavior
+
+- Produces source-aware review suggestions by default.
+- Respects project locale, localization, design-system, and content-preservation policies.
+- Preserves quoted, legal, historical, and branded content when a rule marks it as exempt.
+- Modifies files only when the user explicitly requests edits.
+
+## Repository Structure
+
+The project separates the reusable rule package from agent-specific integration:
+
+- `skills/clreq/`: self-contained installable skill.
+- `rules/`: authoring source for atomic rule cards.
+- `fixtures/`: focused input and expected-review examples.
+- `schema/`: JSON Schema for rule cards.
+- `adapters/`: platform-specific development references.
+- `samples/`: end-to-end review samples.
+
+## Development
+
+The root `rules/`, `fixtures/`, `schema/`, and reference adapter are the authoring sources. After changing them, update the packaged copies and verify that the installable skill remains synchronized:
 
 ```sh
 ./scripts/check-packaged-skill.sh
 ```
 
-## Attribution
+## Sources and Project Status
 
-Rules must cite the sources they rely on. CLReq-backed Rules should link back to CLReq, Chinese Gap Analysis, or closely related Chinese layout requirement material. Web Platform implementation guidance should cite the relevant HTML, CSS, Unicode, or related source.
+Rules cite the sources they rely on. CLReq-backed rules link to [Requirements for Chinese Text Layout](https://www.w3.org/TR/clreq/) or related W3C internationalization material. Web implementation guidance cites relevant HTML, CSS, Unicode, or other authoritative sources.
 
 ## License
 
-This scaffold uses the W3C Software and Document License. See `LICENSE.md`.
+This project uses the W3C Software and Document License. See [LICENSE.md](LICENSE.md).
