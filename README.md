@@ -21,10 +21,10 @@ Install the self-contained `clreq` skill from GitHub:
 npx skills@latest add xfq/clreq-skills --skill clreq
 ```
 
-To install it globally for Codex:
+To install it globally:
 
 ```sh
-npx skills@latest add xfq/clreq-skills --skill clreq --agent codex --global
+npx skills@latest add xfq/clreq-skills --skill clreq --global
 ```
 
 List the skills exposed by a local checkout before publishing changes:
