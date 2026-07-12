@@ -63,7 +63,7 @@
     }
   ],
   "agent_guidance": {
-    "comment_template": "[strong] clreq.variants.contextual-hans-hant-conversion: This Chinese variant conversion needs semantic or locale review.\n\nWhy it matters: CLReq notes that Simplified-Traditional mappings are not always one-to-one, so mechanical conversion can choose the wrong character for the intended meaning.\nSuggested change: Confirm the target script or locale and use a glossary-backed or human-reviewed string before changing the text; for example, `发` may need `發` or `髮` depending on meaning.\nSource: CLReq, Characters used for Chinese Composition.\nConfidence: medium",
+    "comment_template": "[strong] clreq.variants.contextual-hans-hant-conversion: This Chinese variant conversion needs semantic or locale review.\n\n影响： CLReq notes that Simplified-Traditional mappings are not always one-to-one, so mechanical conversion can choose the wrong character for the intended meaning.\nSuggested change: Confirm the target script or locale and use a glossary-backed or human-reviewed string before changing the text; for example, `发` may need `發` or `髮` depending on meaning.\nSource: CLReq, Characters used for Chinese Composition.\nConfidence: medium",
     "autofix_notes": "Do not apply Simplified-Traditional conversion automatically. Even when the target script is known, variant-sensitive words need glossary or human confirmation before edits.",
     "decision_notes": "If the locale is bare `zh` or otherwise ambiguous, ask for the target locale first and lower confidence. If a project glossary exists, follow it and cite the Project Override in the Review Suggestion."
   }

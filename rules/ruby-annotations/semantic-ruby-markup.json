@@ -81,7 +81,7 @@
     }
   ],
   "agent_guidance": {
-    "comment_template": "[normal] clreq.ruby.semantic-markup: Ruby-like Chinese annotation is represented with non-semantic markup.\n\nWhy it matters: CLReq describes ruby as annotation text attached to base text, and HTML provides `<ruby>`/`<rt>` semantics for that relationship across writing modes.\nSuggested change: Use semantic ruby markup for pronunciation, Bopomofo, romanization, or short glosses, then use CSS Ruby properties only for presentation details such as annotation position.\nSource: HTML Standard, ruby; CSS Ruby Annotation Layout; CLReq, Usage of ruby.\nConfidence: medium",
+    "comment_template": "[normal] clreq.ruby.semantic-markup: Ruby-like Chinese annotation is represented with non-semantic markup.\n\n影响： CLReq describes ruby as annotation text attached to base text, and HTML provides `<ruby>`/`<rt>` semantics for that relationship across writing modes.\nSuggested change: Use semantic ruby markup for pronunciation, Bopomofo, romanization, or short glosses, then use CSS Ruby properties only for presentation details such as annotation position.\nSource: HTML Standard, ruby; CSS Ruby Annotation Layout; CLReq, Usage of ruby.\nConfidence: medium",
     "autofix_notes": "Do not rewrite annotation markup automatically unless the base text and annotation text are unambiguous and the user explicitly asks for edits. Preserve plain-text annotations when the project needs exact copy-paste or search output.",
     "decision_notes": "Ask for a human decision when the annotation system, target readers, or plain-text compatibility requirement is unclear. For Bopomofo placement, region and educational context may affect the final layout."
   }

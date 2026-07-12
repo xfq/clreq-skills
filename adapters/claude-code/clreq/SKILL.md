@@ -35,6 +35,6 @@ If locale intent is ambiguous, follow the rule's Ambiguous Chinese Locale policy
 
 ## Output
 
-Use concise Review Suggestions. Include severity, rule id, problem summary, why it matters, suggested change or human decision request, source, and confidence.
+You may ask which output language the user prefers when that would be useful. If the user does not specify a language, default to Simplified Chinese; always follow an explicit language preference. Translate rule-card templates into the selected output language instead of copying their wording mechanically. Use concise Review Suggestions with field labels in the selected language for severity, rule id, problem summary, impact, suggested change or human decision request, source, and confidence.
 
 See `../../../fixtures/claude-code-adapter-language-metadata.md` for a Claude Code-style smoke example and `../../../fixtures/reference-adapter-language-metadata.md` for the platform-neutral equivalent.

@@ -29,7 +29,7 @@
 ```text
 [strong] clreq.variants.contextual-hans-hant-conversion: This Traditional Chinese string appears to need context-sensitive variant review.
 
-Why it matters: CLReq notes that Simplified-Traditional mappings are not always one-to-one, so mechanical conversion can choose the wrong character for the intended meaning.
+影响： CLReq notes that Simplified-Traditional mappings are not always one-to-one, so mechanical conversion can choose the wrong character for the intended meaning.
 Suggested change: Confirm the target wording with a glossary or human reviewer; for this meaning, `新品發售：護髮套裝` is likely the intended Traditional Chinese form.
 Source: CLReq, Characters used for Chinese Composition.
 Confidence: medium

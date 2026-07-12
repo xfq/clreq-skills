@@ -67,7 +67,7 @@
     }
   ],
   "agent_guidance": {
-    "comment_template": "[advisory] clreq.metadata.lang-specificity: The page uses a bare `zh` language tag for Web-facing Chinese Text.\n\nWhy it matters: Some Chinese text recommendations depend on script or region, and the agent should not assume Simplified or Traditional Chinese from `zh` alone.\nSuggested change: Confirm the intended locale and use a more specific BCP 47 language tag such as `zh-Hans` or `zh-Hant` when appropriate.\nSource: HTML Standard; BCP 47; W3C Internationalization language tag guidance.\nConfidence: medium",
+    "comment_template": "[advisory] clreq.metadata.lang-specificity: The page uses a bare `zh` language tag for Web-facing Chinese Text.\n\n影响： Some Chinese text recommendations depend on script or region, and the agent should not assume Simplified or Traditional Chinese from `zh` alone.\nSuggested change: Confirm the intended locale and use a more specific BCP 47 language tag such as `zh-Hans` or `zh-Hant` when appropriate.\nSource: HTML Standard; BCP 47; W3C Internationalization language tag guidance.\nConfidence: medium",
     "autofix_notes": "Do not replace bare `zh` automatically. If the user or Project Override identifies the intended script or region, an agent may update language metadata when explicitly asked to make changes.",
     "decision_notes": "If locale intent is unknown, keep the finding advisory and ask for a human decision. If a project-wide default locale already resolves `zh`, mention the override or suppress the suggestion according to project policy."
   }

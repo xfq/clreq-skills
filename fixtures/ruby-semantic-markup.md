@@ -25,7 +25,7 @@
 ```text
 [normal] clreq.ruby.semantic-markup: Ruby-like Chinese annotation is represented with non-semantic markup.
 
-Why it matters: CLReq describes ruby as annotation text attached to base text, and HTML provides `<ruby>`/`<rt>` semantics for that relationship across writing modes.
+影响： CLReq describes ruby as annotation text attached to base text, and HTML provides `<ruby>`/`<rt>` semantics for that relationship across writing modes.
 Suggested change: Use semantic ruby markup such as `<ruby>汉<rt>han</rt></ruby>`, then use CSS Ruby properties only for presentation details such as annotation position.
 Source: HTML Standard, ruby; CSS Ruby Annotation Layout; CLReq, Usage of ruby.
 Confidence: medium

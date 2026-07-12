@@ -5,7 +5,7 @@ description: Review Web-facing Chinese text in websites and web apps. Use for re
 
 # CLReq review
 
-Produce concise, source-aware review suggestions for Web-facing Chinese text.
+Produce concise, source-aware review suggestions for Web-facing Chinese text. You may ask which output language the user prefers when that would be useful. If the user does not specify a language, default to Simplified Chinese; always follow an explicit language preference.
 
 ## Workflow
 
@@ -23,6 +23,8 @@ Produce concise, source-aware review suggestions for Web-facing Chinese text.
 - Do not review non-user-facing Chinese text unless requested.
 - Do not infer Simplified or Traditional Chinese from bare `zh`.
 - Do not mechanically convert between Simplified and Traditional Chinese.
+- Translate rule-card templates and source descriptions into the selected output language instead of copying their wording mechanically. Keep rule ids, code, standard names, and URLs unchanged when appropriate.
+- Use field labels in the selected output language. When no language preference is given, use Chinese labels and do not emit English field labels.
 - Preserve quoted, legal, historical, branded, technical, and user-generated content when a rule says it is exempt.
 
 ## Resources

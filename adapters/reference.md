@@ -83,15 +83,17 @@ Project Overrides change project policy only. They do not change CLReq, Web Plat
 
 ## Output
 
-Use this shape unless the host platform adapter requires a different wrapper:
+You may ask which output language the user prefers when that would be useful. If the user does not specify a language, default to Simplified Chinese; always follow an explicit language preference. Translate rule-card templates into the selected output language instead of copying their wording mechanically. Keep rule ids, code, standard names, and URLs unchanged when appropriate.
+
+When using the default Simplified Chinese output, use this shape unless the host platform adapter requires a different wrapper. For another selected language, translate the field labels accordingly:
 
 ```text
-[<severity>] <rule id>: <problem summary>
+[<严重程度>] <规则 id>：<问题摘要>
 
-Why it matters: <one sentence>
-Suggested change: <concrete change or human decision request>
-Source: <short Source Citation or "No source citation">
-Confidence: high | medium | low
+影响：<一句话说明>
+修改建议：<具体修改方案或需要人工决定的事项>
+依据：<简短来源引用或“无来源引用”>
+置信度：高 | 中 | 低
 ```
 
 When multiple findings apply, consolidate duplicates into the smallest useful set without dropping distinct applicable findings. Avoid long typography explanations.

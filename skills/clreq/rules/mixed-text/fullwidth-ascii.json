@@ -57,7 +57,7 @@
     }
   ],
   "agent_guidance": {
-    "comment_template": "[normal] clreq.mixed-text.fullwidth-ascii: Mixed Chinese-Western text is using fullwidth ASCII forms as stored text.\n\nWhy it matters: CLReq describes fullwidth ASCII as a historical layout workaround; modern layout engines can handle Latin letters and numerals with appropriate fonts.\nSuggested change: Use ordinary ASCII in Latin and numeric runs, and handle alignment or spacing through typography instead of fullwidth ASCII, unless exact preservation is required.\nSource: CLReq, Composition of Chinese and Western Mixed Texts.\nConfidence: high",
+    "comment_template": "[normal] clreq.mixed-text.fullwidth-ascii: Mixed Chinese-Western text is using fullwidth ASCII forms as stored text.\n\n影响： CLReq describes fullwidth ASCII as a historical layout workaround; modern layout engines can handle Latin letters and numerals with appropriate fonts.\nSuggested change: Use ordinary ASCII in Latin and numeric runs, and handle alignment or spacing through typography instead of fullwidth ASCII, unless exact preservation is required.\nSource: CLReq, Composition of Chinese and Western Mixed Texts.\nConfidence: high",
     "autofix_notes": "If the user explicitly asks for edits, converting fullwidth ASCII forms in Latin and numeric runs to ordinary ASCII is usually mechanical. Preserve intentional brand text, quoted titles, compatibility fixtures, and non-ASCII CJK punctuation.",
     "decision_notes": "If the string appears to be a brand, identifier, historical quotation, or deliberate visual style, ask for confirmation before suggesting a replacement."
   }

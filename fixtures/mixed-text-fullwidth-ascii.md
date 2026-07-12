@@ -29,7 +29,7 @@
 ```text
 [normal] clreq.mixed-text.fullwidth-ascii: Mixed Chinese-Western text is using fullwidth ASCII forms as stored text.
 
-Why it matters: Fullwidth ASCII as a historical layout workaround; modern layout engines can handle Latin letters and numerals with appropriate fonts.
+影响： Fullwidth ASCII as a historical layout workaround; modern layout engines can handle Latin letters and numerals with appropriate fonts.
 Suggested change: Use ordinary ASCII in Latin and numeric runs, for example `支援 API 版本 2.0。`, unless the fullwidth form is an intentional brand or preservation requirement.
 Source: CLReq, Composition of Chinese and Western Mixed Texts.
 Confidence: high

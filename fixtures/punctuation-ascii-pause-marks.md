@@ -25,7 +25,7 @@
 ```text
 [normal] clreq.punctuation.chinese-pause-marks: Chinese prose is using ASCII sentence punctuation.
 
-Why it matters: CLReq describes Chinese pause punctuation as part of Chinese text layout, and ASCII punctuation can make Chinese UI copy look inconsistent unless a technical or editorial exception applies.
+影响： CLReq describes Chinese pause punctuation as part of Chinese text layout, and ASCII punctuation can make Chinese UI copy look inconsistent unless a technical or editorial exception applies.
 Suggested change: Replace the comma and sentence-final period with Chinese punctuation: `今天发布新功能，请升级到最新版本。`
 Source: CLReq, Categories and usage of punctuation marks; CLReq, Composition of Chinese and Western Mixed Texts.
 Confidence: high
