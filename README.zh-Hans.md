@@ -2,7 +2,7 @@
 
 [English](README.md) | 简体中文
 
-`clreq-skills` 把中文文本的排版指南封装为可供编程智能体使用的规则与skill。本项目基于 [《中文排版需求》（CLReq）](https://github.com/w3c/clreq)及相关资料构建。
+`clreq-skills` 把中文文本的排版指南封装为可供编程智能体使用的规则与skill。本项目基于 [《中文排版需求》](https://github.com/w3c/clreq)及相关资料构建。
 
 ## 项目结构
 
