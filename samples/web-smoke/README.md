@@ -28,6 +28,6 @@ Use $clreq to review samples/web-smoke/index.html and samples/web-smoke/styles.c
 
 ## Expected Behavior
 
-The agent should load the adapter, account for every rule card, fully inspect each candidate selected by the Rule Selection procedure, respect the ambiguous locale policy for bare `zh`, and produce all three distinct Review Suggestions in `expected-review.md` at contract level.
+The agent should load the adapter, account for every rule card, fully inspect each candidate selected by the Rule Selection procedure, respect the ambiguous locale policy for bare `zh`, and produce all three distinct Review Suggestions in `expected-review.md`.
 
 The agent should not rewrite files unless the user explicitly asks for edits.

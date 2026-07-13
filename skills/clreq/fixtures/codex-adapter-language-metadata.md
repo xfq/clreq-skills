@@ -14,8 +14,6 @@
 
 **Project Overrides:** None.
 
-**Matching policy:** `contract`
-
 ## Codex Invocation
 
 ```text

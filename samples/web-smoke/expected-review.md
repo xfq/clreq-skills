@@ -1,7 +1,5 @@
 # Expected Review Suggestions
 
-Matching policy: `contract`
-
 ```text
 [advisory] clreq.metadata.lang-specificity: The page uses a bare `zh` language tag for Web-facing Chinese Text.
 

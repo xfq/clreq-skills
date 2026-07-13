@@ -12,8 +12,6 @@
 
 **Project Overrides:** None.
 
-**Matching policy:** `contract`
-
 ## Input
 
 ```css

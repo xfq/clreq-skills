@@ -14,8 +14,6 @@
 
 **Project Overrides:** None.
 
-**Matching policy:** `contract`
-
 ## Claude Code Invocation
 
 ```text
