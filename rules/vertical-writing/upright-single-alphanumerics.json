@@ -1,0 +1,73 @@
+{
+  "id": "clreq.vertical-writing.upright-single-alphanumerics",
+  "title": "Keep single alphanumerics and initialisms upright in vertical text",
+  "layer": "clreq-backed",
+  "applies_to": {
+    "scripts": [
+      "Hans",
+      "Hant"
+    ],
+    "surfaces": [
+      "css",
+      "html",
+      "jsx",
+      "tsx",
+      "vue",
+      "svelte"
+    ],
+    "writing_modes": [
+      "vertical"
+    ],
+    "ambiguous_locale_policy": "allow"
+  },
+  "default_action": "review",
+  "severity": "normal",
+  "detect": {
+    "signal": "Readable vertical Web-facing Chinese Text contains a standalone Latin letter or Arabic numeral, or an initialism such as `GDP`, and that specific run is rendered with `text-orientation: mixed` or `sideways`, or has no targeted `text-orientation: upright` override, so it turns sideways instead of remaining upright.",
+    "ignore_when": [
+      "The Latin text is an ordinary Western word, phrase, or sentence, or the Arabic numeral is a run of four or more digits that is intentionally set sideways.",
+      "A two- or three-digit numeral is intentionally set with horizontal-in-vertical composition such as `text-combine-upright`.",
+      "The relevant inline run already receives `text-orientation: upright` through an inherited style, utility class, design-system component, or generated output.",
+      "The content is a decorative logo, brand treatment, mathematical formula, code token, or other text whose orientation must be preserved exactly.",
+      "A Project Override documents a different orientation for this component.",
+      "The text is not Web-facing Chinese Text."
+    ]
+  },
+  "rationale": "CLReq says that a single Latin letter or Arabic numeral, and an initialism such as `GDP`, is commonly arranged in vertical Chinese text without turning. In CSS vertical writing modes, `text-orientation: upright` keeps horizontal-script typographic character units in their standard upright orientation. Apply it to the relevant inline run rather than the whole vertical container so ordinary Western words and longer numeric runs can retain their intended orientation.",
+  "sources": {
+    "clreq": [
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#mixed_text_composition_in_vertical_writing_mode",
+        "section": "Mixed text composition in vertical writing mode",
+        "retrieved_or_version": "retrieved 2026-07-12"
+      }
+    ],
+    "web_platform": [
+      {
+        "title": "CSS Writing Modes Level 4",
+        "url": "https://www.w3.org/TR/css-writing-modes-4/#text-orientation",
+        "section": "Orienting Text: the text-orientation property",
+        "retrieved_or_version": "W3C Candidate Recommendation, 30 July 2019; retrieved 2026-07-12"
+      }
+    ],
+    "other": []
+  },
+  "examples": [
+    {
+      "context": "A `GDP` initialism inside vertical Chinese copy.",
+      "bad": "<p class=\"vertical-copy\">今年 <span>GDP</span> 成长。</p>\n\n.vertical-copy {\n  writing-mode: vertical-rl;\n}",
+      "good": "<p class=\"vertical-copy\">今年 <span class=\"upright\">GDP</span> 成长。</p>\n\n.vertical-copy {\n  writing-mode: vertical-rl;\n}\n.upright {\n  text-orientation: upright;\n}"
+    },
+    {
+      "context": "A standalone Arabic numeral inside a vertical Chinese ranking label.",
+      "bad": "<span class=\"vertical-rank\">第 <span>1</span> 名</span>\n\n.vertical-rank {\n  writing-mode: vertical-rl;\n}",
+      "good": "<span class=\"vertical-rank\">第 <span class=\"upright\">1</span> 名</span>\n\n.vertical-rank {\n  writing-mode: vertical-rl;\n}\n.upright {\n  text-orientation: upright;\n}"
+    }
+  ],
+  "agent_guidance": {
+    "comment_template": "[normal] clreq.vertical-writing.upright-single-alphanumerics: A standalone Latin letter, Arabic numeral, or initialism in vertical Chinese text is rendered sideways.\n\n影响： CLReq commonly keeps these short alphanumeric runs in the same upright direction as Han characters, and CSS provides `text-orientation: upright` for that rendering.\nSuggested change: Target the specific inline run and set `text-orientation: upright;`. Do not apply it indiscriminately to ordinary Western words, sentences, or longer numeric runs.\nSource: CLReq, Mixed text composition in vertical writing mode; CSS Writing Modes Level 4, text-orientation.\nConfidence: medium",
+    "autofix_notes": "Do not add `text-orientation: upright` automatically unless the target run and its vertical writing context are unambiguous. The fix may require wrapping only the standalone character or initialism in an inline element, and two- or three-digit numerals may instead use `text-combine-upright`.",
+    "decision_notes": "Distinguish initialisms intended to read character by character from ordinary Western words or phrases. When a numeric run has two or three digits, consider whether horizontal-in-vertical composition is the intended design; longer numeric runs are commonly set sideways."
+  }
+}
