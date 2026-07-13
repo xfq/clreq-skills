@@ -8,7 +8,7 @@
 
 **Input surface:** HTML and CSS
 
-**Locale context:** Simplified Chinese (`zh-Hans`) copy is rendered in vertical writing mode.
+**Locale context:** Chinese text is rendered in vertical writing mode.
 
 **Project Overrides:** None.
 
@@ -17,11 +17,11 @@
 ## Input
 
 ```html
-<p class="vertical-copy">今年 <span>GDP</span> 成长。</p>
+<p class="vertical">今年<span>GDP</span>增长了。</p>
 ```
 
 ```css
-.vertical-copy {
+.vertical {
   writing-mode: vertical-rl;
 }
 ```

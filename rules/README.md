@@ -22,7 +22,7 @@ Every rule must satisfy the Rule Admission Criteria before it is included.
 - `mixed-text/fullwidth-ascii.json`: CLReq-backed review for fullwidth ASCII forms in mixed Chinese-Western text.
 - `locale-sensitive-variants/contextual-hans-hant-conversion.json`: CLReq-backed human-decision rule for context-dependent Simplified-Traditional conversion.
 - `vertical-writing/avoid-transform-rotate.json`: Implementation Check for readable vertical Web-facing Chinese Text implemented with visual rotation.
-- `vertical-writing/upright-single-alphanumerics.json`: CLReq-backed review for keeping standalone Latin letters, Arabic numerals, and initialisms upright in vertical Chinese text.
+- `vertical-writing/upright-single-alphanumerics.json`: Review for keeping standalone Latin letters, Arabic numerals, and initialisms upright in vertical Chinese text.
 - `ruby-annotations/semantic-ruby-markup.json`: Implementation Check for ruby-like annotations that lack semantic HTML ruby markup.
 
 See `../docs/rule-card-contract.md` for the Atomic Rule Card contract and `../docs/rule-admission-criteria.md` for the admission gate.
