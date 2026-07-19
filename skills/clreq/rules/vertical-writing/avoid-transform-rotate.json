@@ -28,7 +28,7 @@
       "The rotated element is a decorative logo, icon, badge, chart label, or short visual ornament rather than readable Web-facing Chinese Text.",
       "The rotation is part of an intentional animation or art direction and the text also has an accessible, readable alternative.",
       "The text is a short UI tab label whose layout has been reviewed and documented by the design system.",
-      "A Project Override documents that visual rotation is required for this component.",
+      "A Project Override documents that visual rotation is required for this component."
     ]
   },
   "rationale": "CSS transforms rotate the painted box, but they do not make the text participate in vertical writing layout. For readable Web-facing Chinese Text, CSS writing modes let layout, line progression, punctuation, and mixed Latin text be reviewed as text rather than as a rotated graphic.",

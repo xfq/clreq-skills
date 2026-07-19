@@ -24,5 +24,6 @@ Every rule must satisfy the Rule Admission Criteria before it is included.
 - `vertical-writing/avoid-transform-rotate.json`: Implementation Check for readable vertical Web-facing Chinese Text implemented with visual rotation.
 - `vertical-writing/upright-single-alphanumerics.json`: review for keeping standalone Latin letters, Arabic numerals, and initialisms upright in vertical Chinese text.
 - `ruby-annotations/semantic-ruby-markup.json`: Implementation Check for ruby-like annotations that lack semantic HTML ruby markup.
+- `ruby-annotations/reading-standard.json`: Human-decision rule for unresolved regional reading standards, tone policies, and ambiguous readings.
 
 Rule cards must validate against `../schema/rule-card.schema.json` and include source citations for factual guidance.

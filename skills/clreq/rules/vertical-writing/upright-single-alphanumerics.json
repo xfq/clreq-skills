@@ -29,7 +29,7 @@
       "A two- or three-digit numeral is intentionally set with horizontal-in-vertical composition such as `text-combine-upright`.",
       "The relevant inline run already receives `text-orientation: upright` through an inherited style, utility class, design-system component, or generated output.",
       "The content is a decorative logo, brand treatment, mathematical formula, code token, or other text whose orientation must be preserved exactly.",
-      "A Project Override documents a different orientation for this component.",
+      "A Project Override documents a different orientation for this component."
     ]
   },
   "rationale": "CLReq says that a single Latin letter or Arabic numeral, and an initialism such as `GDP`, is commonly arranged in vertical Chinese text without turning. In CSS vertical writing modes, `text-orientation: upright` keeps horizontal-script typographic character units in their standard upright orientation. Apply it to the relevant inline run rather than the whole vertical container so ordinary Western words and longer numeric runs can retain their intended orientation.",

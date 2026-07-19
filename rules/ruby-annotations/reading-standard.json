@@ -1,0 +1,87 @@
+{
+  "id": "clreq.ruby.reading-standard",
+  "title": "Resolve the reading standard once before authoring Chinese phonetic ruby",
+  "layer": "implementation-check",
+  "applies_to": {
+    "scripts": [
+      "Hans",
+      "Hant",
+      "Bopo",
+      "Latn"
+    ],
+    "surfaces": [
+      "html",
+      "jsx",
+      "tsx",
+      "vue",
+      "svelte",
+      "markdown",
+      "mdx"
+    ],
+    "writing_modes": [
+      "horizontal",
+      "vertical"
+    ],
+    "ambiguous_locale_policy": "ask-human"
+  },
+  "default_action": "ask-human",
+  "severity": "strong",
+  "detect": {
+    "signal": "Chinese phonetic ruby is being added or changed without one upfront decision covering the language or reading system, regional standard, author preference, and tone-sandhi policy. If the author specifies no preference and no applicable regional standard is available, apply the fallback by script: Traditional Chinese uses Taiwan MOE readings and Simplified Chinese uses mainland 普通话. Ask once at the start when the language, script, or governing standard cannot be resolved, the tone-sandhi policy is not documented, or a genuine reading ambiguity remains after the standard is selected.",
+    "ignore_when": [
+      "The user or nearby editorial documentation records one upfront decision for the language or reading system, regional standard, author preference, and tone-sandhi policy; the author's explicit preference takes precedence over the regional standard.",
+      "No author preference or applicable regional standard is specified, the text is clearly Traditional Chinese, the Taiwan MOE reading default is applied consistently, and the tone-sandhi policy is explicitly selected once up front.",
+      "No author preference or applicable regional standard is specified, the text is clearly Simplified Chinese, the mainland 普通话 reading default is applied consistently, and the tone-sandhi policy is explicitly selected once up front.",
+      "A Project Override or authoritative project glossary selects a different documented standard, such as Singapore or Malaysia Mandarin, a topolect, or Japanese, Korean, or Vietnamese readings, and records the tone-sandhi policy once up front.",
+      "The linguistic context resolves an individual reading after the upfront standard has been selected, with no remaining material regional or register ambiguity.",
+      "The task preserves existing annotation text exactly and does not author, normalize, or validate the reading.",
+      "The task concerns only ruby markup or layout structure and leaves the annotation text unchanged."
+    ]
+  },
+  "rationale": "Phonetic ruby records a linguistic choice, not only a visual treatment. CLReq distinguishes Bopomofo and romanization systems, regional usage, and character-based versus word-based annotation practices. Resolve the reading language or system, regional standard, author preference, and tone-sandhi policy once before emitting annotation text. The Traditional-Chinese-to-Taiwan-MOE and Simplified-Chinese-to-普通话 fallbacks fill only an otherwise unspecified regional reading standard; they do not choose the author's tone-sandhi marking policy.",
+  "sources": {
+    "clreq": [
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#usage_of_interlinear_annotations",
+        "section": "Inline notes & annotations: Usage of ruby",
+        "retrieved_or_version": "retrieved 2026-07-18"
+      },
+      {
+        "title": "Requirements for Chinese Text Layout (CLReq)",
+        "url": "https://www.w3.org/TR/clreq/#positioning_of_romanized_ruby",
+        "section": "Positioning of Romanized ruby",
+        "retrieved_or_version": "retrieved 2026-07-18"
+      }
+    ],
+    "web_platform": [],
+    "other": []
+  },
+  "examples": [
+    {
+      "context": "A bare `zh` tag does not identify whether the default should be Taiwan MOE or mainland 普通话.",
+      "bad": "<p lang=\"zh\">我<ruby>和<rt>ㄏㄜˊ</rt></ruby>你</p>",
+      "good": "Ask once whether the text is Traditional Chinese or Simplified Chinese, or which named standard the author wants, and how tone sandhi should be marked; then apply that decision consistently rather than asking again for each ambiguous character."
+    },
+    {
+      "context": "The author specifies no preference and no applicable regional standard is available for clearly Traditional Chinese text.",
+      "bad": "Ask the author to choose a reading standard for every occurrence.",
+      "good": "Apply Taiwan MOE readings once as the default after the author selects the tone-sandhi marking policy, then use both decisions consistently throughout the text."
+    },
+    {
+      "context": "The author specifies no preference and no applicable regional standard is available for clearly Simplified Chinese text.",
+      "bad": "Ask the author to choose a reading standard for every occurrence.",
+      "good": "Apply mainland 普通话 readings once as the default after the author selects the tone-sandhi marking policy, then use both decisions consistently throughout the text."
+    },
+    {
+      "context": "The author explicitly prefers a named standard over the script-based default.",
+      "bad": "Ignore the author's named standard and apply the script-based fallback instead.",
+      "good": "Honor the author's explicit reading-system and tone-policy preference even when the surrounding text would otherwise default to Taiwan MOE."
+    }
+  ],
+  "agent_guidance": {
+    "comment_template": "[strong] clreq.ruby.reading-standard: The phonetic ruby lacks one resolved reading-standard decision.\n\n影响： Chinese readings, annotation systems, and tone-sandhi conventions vary by language, region, audience, and editorial purpose; choosing per occurrence can create inconsistent or misleading pronunciation guidance.\nSuggested change: Ask once at the start for the governing language or reading system, regional standard, author preference, and tone-sandhi policy. If the author specifies no preference and no applicable regional standard is available, use Taiwan MOE readings for Traditional Chinese and mainland 普通话 for Simplified Chinese.\nSource: CLReq, Usage of ruby; CLReq, Positioning of Romanized ruby.\nConfidence: medium",
+    "autofix_notes": "Do not ask or guess independently for each occurrence. Establish one decision at task start. An explicit author preference overrides the regional standard; otherwise use the Traditional-Chinese-to-Taiwan-MOE or Simplified-Chinese-to-普通话 fallback for the reading standard only. Never invent a tone-sandhi marking policy; ask for it once when it is not documented.",
+    "decision_notes": "Apply this precedence: (1) the author's explicit preference, (2) the applicable regional standard, (3) the fallback Taiwan MOE reading for Traditional Chinese or mainland 普通话 for Simplified Chinese. The one upfront decision must state the reading system—such as 普通话, Taiwan MOE 審訂音, Singapore or Malaysia Mandarin, a topolect, or Japanese/Korean/Vietnamese readings—and how tone sandhi is marked."
+  }
+}
