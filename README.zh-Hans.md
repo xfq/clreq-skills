@@ -89,11 +89,49 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 
 ## 开发
 
-根目录中的 `rules/`、`fixtures/`、`schema/` 和参考适配器是内容编写时的事实来源。修改后需要同步更新技能包内的副本，并检查可安装版本是否一致：
+可安装的skill位于 `skills/clreq/`，其内容来自项目根目录中编写源的同步副本。修改任何源文件后，需要同步副本并验证。
+
+### 修改已有规则
+
+编辑 `rules/<类别>/` 中的JSON规则卡，然后同步：
 
 ```sh
+cp -r rules/ skills/clreq/rules/
 ./scripts/check-packaged-skill.sh
 ```
+
+### 新增规则
+
+1. 在 `rules/<类别>/` 下创建JSON规则卡。
+2. 在 `fixtures/` 下添加对应的fixture。
+3. 同步两者：
+
+   ```sh
+   cp -r rules/ skills/clreq/rules/
+   cp -r fixtures/ skills/clreq/fixtures/
+   ./scripts/check-packaged-skill.sh
+   ```
+
+### 更新 schema
+
+```sh
+cp schema/rule-card.schema.json skills/clreq/schema/rule-card.schema.json
+./scripts/check-packaged-skill.sh
+```
+
+### 更新参考适配器
+
+参考适配器位于 `adapters/reference.md`。其打包副本 `skills/clreq/references/review-workflow.md` 有一行不同（输出格式引用）。同步时需应用相同变换：
+
+```sh
+sed 's#using `docs/review-suggestion-format.md`#using the Output format below#' \
+  adapters/reference.md > skills/clreq/references/review-workflow.md
+./scripts/check-packaged-skill.sh
+```
+
+### 验证
+
+`check-packaged-skill.sh` 会将源目录与打包副本进行diff，发现差异会以非零值退出。每次同步后运行以确认技能包可以安装。
 
 ## 来源
 
