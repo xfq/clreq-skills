@@ -13,5 +13,5 @@ Review Web-facing Chinese text and layout. Return concise, source-aware suggesti
 2. Determine the requested scope, rendered surface, and locale; inspect nearby localization or design-system context when needed.
 3. Account for every `*.json` rule card under `rules/`. Fully read each candidate before applying its detection signals, `ignore_when`, ambiguous-locale policy, and project overrides.
 4. For explicit repository-wide scope, discover candidate files and maintain the reference workflow's file coverage ledger, batching without silently skipping files.
-5. Finish only when every rule and in-scope candidate file has a disposition and all distinct unsuppressed findings—or unresolved limitations—are reported. Consolidate duplicate findings without dropping independent issues.
+5. Finish only when every rule and in-scope candidate file has a disposition and all distinct unsuppressed findings or unresolved limitations are reported. Consolidate duplicate findings without dropping independent issues.
 6. Modify files only when explicitly requested.
