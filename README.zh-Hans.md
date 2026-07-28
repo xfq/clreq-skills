@@ -48,6 +48,12 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 
 可安装的技能包是自包含的 `skills/clreq/` 目录。
 
+也可以在Claude Code、Codex等支持Agent Skills的工具里，直接说：
+
+```text
+帮我安装这个skill：https://github.com/xfq/clreq-skills
+```
+
 ## 使用
 
 审查指定文件：

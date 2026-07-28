@@ -48,6 +48,12 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 
 The installable package is the self-contained `skills/clreq/` directory.
 
+You can also simply say the following in Claude Code, Codex, or another agent that supports Agent Skills:
+
+```text
+install this skill: https://github.com/xfq/clreq-skills
+```
+
 ## Use
 
 Review selected files:
