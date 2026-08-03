@@ -97,43 +97,15 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 
 可安装的skill位于 `skills/clreq/`，其内容来自项目根目录中编写源的同步副本。修改任何源文件后，需要同步副本并验证。
 
-### 修改已有规则
+### 同步源文件到打包后的skill
 
-编辑 `rules/<类别>/` 中的JSON规则卡，然后同步：
-
-```sh
-cp -r rules/ skills/clreq/rules/
-./scripts/check-packaged-skill.sh
-```
-
-### 新增规则
-
-1. 在 `rules/<类别>/` 下创建JSON规则卡。
-2. 在 `fixtures/` 下添加对应的fixture。
-3. 同步两者：
-
-   ```sh
-   cp -r rules/ skills/clreq/rules/
-   cp -r fixtures/ skills/clreq/fixtures/
-   ./scripts/check-packaged-skill.sh
-   ```
-
-### 更新 schema
+修改任何源文件（规则、fixtures、schema或参考适配器）后，需要同步变更到 `skills/clreq/`：
 
 ```sh
-cp schema/rule-card.schema.json skills/clreq/schema/rule-card.schema.json
-./scripts/check-packaged-skill.sh
+./scripts/sync.sh
 ```
 
-### 更新参考适配器
-
-参考适配器位于 `adapters/reference.md`。其打包副本 `skills/clreq/references/review-workflow.md` 有一行不同（输出格式引用）。同步时需应用相同变换：
-
-```sh
-sed 's#using `docs/review-suggestion-format.md`#using the Output format below#' \
-  adapters/reference.md > skills/clreq/references/review-workflow.md
-./scripts/check-packaged-skill.sh
-```
+这个命令会把所有源目录复制到打包技能中，并自动运行 `check-packaged-skill.sh` 验证结果。
 
 ### 验证
 

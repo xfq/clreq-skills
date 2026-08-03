@@ -91,43 +91,15 @@ The project separates the reusable rule package from agent-specific integration:
 
 The installable skill lives in `skills/clreq/`. Its contents are synced copies of the authoring sources in the project root. After editing any source, sync the copies and verify.
 
-### Edit an existing rule
+### Sync sources to the packaged skill
 
-Edit the JSON rule card in `rules/<category>/`, then sync:
-
-```sh
-cp -r rules/ skills/clreq/rules/
-./scripts/check-packaged-skill.sh
-```
-
-### Add a new rule
-
-1. Create the JSON rule card under `rules/<category>/`.
-2. Add a matching fixture under `fixtures/`.
-3. Sync both:
-
-   ```sh
-   cp -r rules/ skills/clreq/rules/
-   cp -r fixtures/ skills/clreq/fixtures/
-   ./scripts/check-packaged-skill.sh
-   ```
-
-### Update the schema
+After editing any source file (rules, fixtures, schema, or the reference adapter), sync the changes to `skills/clreq/`:
 
 ```sh
-cp schema/rule-card.schema.json skills/clreq/schema/rule-card.schema.json
-./scripts/check-packaged-skill.sh
+./scripts/sync.sh
 ```
 
-### Update the reference adapter
-
-The reference adapter lives at `adapters/reference.md`. Its packaged copy at `skills/clreq/references/review-workflow.md` differs in one line (the output format reference). Apply the same transformation before syncing:
-
-```sh
-sed 's#using `docs/review-suggestion-format.md`#using the Output format below#' \
-  adapters/reference.md > skills/clreq/references/review-workflow.md
-./scripts/check-packaged-skill.sh
-```
+This copies all source directories into the packaged skill, transforms the reference adapter, and runs `check-packaged-skill.sh` to verify the result.
 
 ### Verify
 

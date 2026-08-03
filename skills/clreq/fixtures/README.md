@@ -10,4 +10,4 @@ Each fixture should make clear:
 - the expected suggested change or human decision request
 - the expected confidence and Source Citation behavior
 
-Keep fixtures focused on one primary rule and include enough locale and surface context to judge applicability.
+See `../docs/golden-review-fixtures.md` for fixture authoring rules.
