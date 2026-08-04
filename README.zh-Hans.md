@@ -105,7 +105,7 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 ./scripts/sync.sh
 ```
 
-这个命令会把所有源目录复制到打包技能中，并自动运行 `check-packaged-skill.sh` 验证结果。
+这个命令会把所有源目录复制到打包技能中，并把参考适配器复制为打包后的审查工作流，然后自动运行 `check-packaged-skill.sh` 验证结果。
 
 ### 验证
 

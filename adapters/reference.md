@@ -48,7 +48,7 @@ Do not comment on non-user-facing Chinese text unless the user explicitly asks f
 4. Build the candidate rule set using the Rule Selection procedure below.
 5. Read every candidate Atomic Rule Card and apply its Detection Signals, `ignore_when` conditions, Ambiguous Chinese Locale policy, and Project Overrides.
 6. Check the Review Completion conditions below; do not stop after the first finding.
-7. Emit Review Suggestions using `docs/review-suggestion-format.md`.
+7. Emit Review Suggestions using the Output format below.
 8. Do not modify files unless the user explicitly asks for edits.
 
 ## Rule Selection

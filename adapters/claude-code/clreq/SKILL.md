@@ -18,7 +18,7 @@ Use this skill to produce short, source-aware Review Suggestions for Web-facing 
 3. Account for every Atomic Rule Card under `../../../rules/`, then fully read each candidate selected by the Reference Adapter; do not copy rule content into this adapter.
 4. Apply rule-level Detection Signals, `ignore_when`, Ambiguous Chinese Locale policy, and Project Overrides.
 5. Finish only after every rule has a disposition and every distinct unsuppressed finding has been emitted or the review limitation has been stated.
-6. Emit Review Suggestions using the format in `../../../docs/review-suggestion-format.md`.
+6. Emit Review Suggestions using the Output section in `../../reference.md`.
 7. Do not modify files unless the user explicitly asks for edits.
 
 ## Claude Code Notes

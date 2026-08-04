@@ -14,9 +14,8 @@ cp -r fixtures/ skills/clreq/fixtures/
 # Sync schema
 cp schema/rule-card.schema.json skills/clreq/schema/rule-card.schema.json
 
-# Transform and sync reference adapter
-sed 's#using `docs/review-suggestion-format.md`#using the Output format below#' \
-  adapters/reference.md > skills/clreq/references/review-workflow.md
+# Sync reference adapter
+cp adapters/reference.md skills/clreq/references/review-workflow.md
 
 echo "Sync complete. Running validation..."
 

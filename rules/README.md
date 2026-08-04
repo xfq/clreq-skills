@@ -25,5 +25,3 @@ Every rule must satisfy the Rule Admission Criteria before it is included.
 - `vertical-writing/upright-single-alphanumerics.json`: Review for keeping standalone Latin letters, Arabic numerals, and initialisms upright in vertical Chinese text.
 - `ruby-annotations/semantic-ruby-markup.json`: Implementation Check for ruby-like annotations that lack semantic HTML ruby markup.
 - `ruby-annotations/reading-standard.json`: Human-decision rule for unresolved regional reading standards, tone policies, and ambiguous readings.
-
-See `../docs/rule-card-contract.md` for the Atomic Rule Card contract and `../docs/rule-admission-criteria.md` for the admission gate.

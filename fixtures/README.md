@@ -9,5 +9,3 @@ Each fixture should make clear:
 - the expected problem summary
 - the expected suggested change or human decision request
 - the expected confidence and Source Citation behavior
-
-See `../docs/golden-review-fixtures.md` for fixture authoring rules.

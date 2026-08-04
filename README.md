@@ -99,7 +99,7 @@ After editing any source file (rules, fixtures, schema, or the reference adapter
 ./scripts/sync.sh
 ```
 
-This copies all source directories into the packaged skill, transforms the reference adapter, and runs `check-packaged-skill.sh` to verify the result.
+This copies all source directories into the packaged skill, copies the reference adapter as the packaged review workflow, and runs `check-packaged-skill.sh` to verify the result.
 
 ### Verify
 
