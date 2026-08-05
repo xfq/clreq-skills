@@ -103,7 +103,19 @@ This copies all source directories into the packaged skill, copies the reference
 
 ### Verify
 
-`check-packaged-skill.sh` diffs the source directories against the packaged copies and exits non-zero on any difference. Run it after every sync to confirm the skill is ready to install.
+`check-packaged-skill.sh` diffs the source directories against the packaged copies and validates every rule card in `rules/` against `schema/rule-card.schema.json`, exiting non-zero on any difference or invalid card. Run it after every sync to confirm the skill is ready to install.
+
+The validation script needs the `jsonschema` package. Set up the dev dependency once:
+
+```sh
+python3 -m pip install -r requirements-dev.txt
+```
+
+You can also run the validation on its own:
+
+```sh
+python3 scripts/validate-rules.py
+```
 
 ## Sources
 

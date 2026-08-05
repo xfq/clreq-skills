@@ -109,7 +109,19 @@ npx skills@latest add xfq/clreq-skills --skill clreq
 
 ### 验证
 
-`check-packaged-skill.sh` 会将源目录与打包副本进行diff，发现差异会以非零值退出。每次同步后运行以确认技能包可以安装。
+`check-packaged-skill.sh` 会将源目录与打包副本进行diff，并用 `schema/rule-card.schema.json` 校验 `rules/` 中的每张规则卡，发现差异时以非零值退出。每次同步后运行以确认技能包可以安装。
+
+校验脚本依赖 `jsonschema` 包，先安装一次开发依赖：
+
+```sh
+python3 -m pip install -r requirements-dev.txt
+```
+
+也可以单独运行校验：
+
+```sh
+python3 scripts/validate-rules.py
+```
 
 ## 来源
 

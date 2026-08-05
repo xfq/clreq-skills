@@ -1,0 +1,2 @@
+# Dev-time validation only; not part of the installable skill package.
+jsonschema>=4.18,<5
