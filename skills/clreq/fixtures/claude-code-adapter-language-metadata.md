@@ -30,13 +30,4 @@
 </html>
 ```
 
-## Expected Claude Code-Style Output
-
-```text
-[advisory] clreq.metadata.lang-specificity: The page uses a bare `zh` language tag for Web-facing Chinese Text.
-
-影响： Some Chinese text recommendations depend on script or region, and the agent should not assume Simplified or Traditional Chinese from `zh` alone.
-Suggested change: Confirm the intended locale and use a more specific BCP 47 language tag such as `zh-Hans` or `zh-Hant` when appropriate.
-Source: HTML Standard; BCP 47; W3C Internationalization language tag guidance.
-Confidence: medium
-```
+The expected output is identical to the reference fixture: see `reference-adapter-language-metadata.md`.

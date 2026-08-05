@@ -8,4 +8,4 @@ First-version priority:
 - `codex/`: Codex Platform Adapter
 - `claude-code/`: Claude Code Platform Adapter
 
-Later adapters may cover Cursor, OpenClaude, OpenCode, and other agents. Adapters should stay thin: they handle installation, Coarse Triggers, Project Overrides, and output conventions, but the Universal Rule Package remains the source of truth.
+Later adapters may cover Cursor, OpenClaude, OpenCode, and other agents. Adapters should stay thin: they handle installation and platform-specific invocation behavior only. `reference.md` defines triggers, project overrides, and output conventions, and the Universal Rule Package remains the source of truth.
