@@ -12,3 +12,6 @@ diff -u adapters/reference.md skills/clreq/references/review-workflow.md
 
 # Validate every Atomic Rule Card in the source rules/ against the schema.
 python3 scripts/validate-rules.py
+
+# Check that local relative links in Markdown files resolve.
+python3 scripts/check-relative-links.py
