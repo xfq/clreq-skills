@@ -7,6 +7,6 @@ description: Review Chinese Text in websites and web apps using the clreq-skills
 
 Follow `../../reference.md` completely for Coarse Triggers, scope and exclusions, Repository Scan, Rule Selection, Review Completion, Project Overrides, and Output format. The Atomic Rule Cards under `../../../rules/` are the source of truth; this adapter does not restate them.
 
-Platform delta: invoked as `$clreq`, or auto-loaded when the skill description matches the task.
+Platform delta: invoke explicitly as `$clreq`; implicit invocation is disabled to avoid loading the skill instructions into unrelated tasks.
 
 See `../../../fixtures/codex-adapter-language-metadata.md` for the platform smoke example.

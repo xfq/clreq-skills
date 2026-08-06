@@ -10,4 +10,4 @@ npx skills@latest add xfq/clreq-skills --skill clreq --agent codex --global
 
 ## Invoke
 
-Use `$clreq`, or let the skill description auto-load it, when reviewing Web-facing Chinese Text or CSS that affects rendered Chinese text. The installable, self-contained package is `../../skills/clreq/`; this adapter remains a platform-specific development reference.
+Use `$clreq` explicitly when reviewing Web-facing Chinese Text or CSS that affects rendered Chinese text. Implicit invocation is disabled so the skill instructions are not loaded into unrelated tasks. The installable, self-contained package is `../../skills/clreq/`; this adapter remains a platform-specific development reference.
